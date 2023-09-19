@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Validasi Input</title>
+  <script>
+    function validateInput() {
+      var name = document.getElementById("inputName").value;
+      var password = document.getElementById("inputPassword").value;
+      var email = document.getElementById("inputEmail").value;
+      
+      if (password !== "sss") {
+        document.getElementById("error").innerHTML = "Password salah!";
+      } else if (name === "") {
+        document.getElementById("error").innerHTML = "Nama harus diisi!";
+      } else if (email === "") {
+        document.getElementById("error").innerHTML = "Email harus diisi!";
+      } else {
+        document.getElementById("error").innerHTML = "";
+        // Lakukan tindakan lain jika input valid
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Validasi Input</h1>
+  
+  <label for="inputName">Nama: </label>
+  <input type="text" id="inputName">
+  <br><br>
+  
+  <label for="inputPassword">Password: </label>
+  <input type="password" id="inputPassword">
+  <br><br>
+  
+  <label for="inputEmail">Email: </label>
+  <input type="email" id="inputEmail">
+  <br><br>
+  
+  <button onclick="validateInput()">Submit</button>
+  
+  <p id="error"></p>
+</body>
+</html>
