@@ -1,0 +1,254 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>PETA SEBARAN KAMPUS DI JOGJA</title> 
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+        <style> 
+        h3 {
+        border: 5px solid rgb(2, 27, 79);
+        text-align: center;
+        width: 1160px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        margin-right: 150px;
+        margin-left: 50px;
+        background-color: rgb(70, 76, 111);
+        }
+        html, body, section
+        {
+        position: relative;
+        height: 100%;
+        background-color: #d8d8d8;
+        }
+        html   {scroll-behavior: smooth;}
+        #map {
+        width: 1160px;
+        height: 480px;
+        margin-left: 50px;
+        }
+
+        body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+        body {font-size:16px;}
+        .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+        .w3-half img:hover{opacity:1}
+        
+        #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 200%;
+        }
+        </style> 
+    </head> 
+    <body> 
+        <h3 style="color:rgb(255, 255, 255);"><b>PETA PERSEBARAN KAMPUS NEGERI DAN SWASTA DI YOGYAKARTA</b></h3>
+        <div id="map"></div>
+        <script>
+
+        var atmajaya    = L.marker([-7.780253873778961, 110.41408944235623]).bindPopup('Universitas Atma Jaya'),
+            uii         = L.marker([-7.687669006269317, 110.41320427901064]).bindPopup('Universitas Islam Indonesia'),
+            ukdw     = L.marker([-7.785968099213533, 110.37836961776321],).bindPopup('Universitas Kristen Duta Wacana'),
+            ugm         = L.marker([-7.771246498354627, 110.37754270970117]).bindPopup('Universitas Gadjah Mada (UGM)'),
+            ust			= L.marker([-7.807955083950973, 110.38168362070137]).bindPopup('Universitas Sarjanawiyata Tamansiswa'),
+            unriyo      = L.marker([-7.781504851421147, 110.40725668807157]).bindPopup('Universitas Respati Yogyakarta (UNRIYO)'),
+            uad         = L.marker([-7.798416411508186, 110.38304742023291]).bindPopup('Universitas Ahmad Dahlan (UAD)'),
+            akindo      = L.marker([-7.781254151428151, 110.4068138097014]).bindPopup('Akademi Komunikasi Indonesia (AKINDO) YPK'),
+            umy         = L.marker([-7.810600276928457, 110.32183943668505]).bindPopup('Universitas Muhammadiyah Yogyakarta')
+			stik        = L.marker([-7.767673789702375, 110.39575323928713]).bindPopup('Sekolah Tinggi Ilmu Kesehatan Panti Rapih'),
+            pky         = L.marker([-7.781002641459743, 110.34294103668455]).bindPopup('Poltekkes Kemenkes Yogyakarta'),
+            ista        = L.marker([-7.7837668909163344, 110.38530100942546]).bindPopup('Institut Sains dan Teknologi Akprind'),
+            isi         = L.marker([-7.851601150797581, 110.35653541181614]).bindPopup('Institut Seni Indonesia Yogyakarta)'),
+            upnvy		= L.marker([-7.762051773222823, 110.40932170970089]).bindPopup('UPN Veteran Yogyakarta'),
+            atky        = L.marker([-7.843053279681421, 110.3705693808664]).bindPopup('Akademi Teknologi Kulit Yogyakarta'),
+            ucy         = L.marker([-7.819661723635494, 110.39291300970204]).bindPopup('Universitas Cokroaminoto Yogyakarta'),
+            uin         = L.marker([-7.784645702755892, 110.39431597901235]).bindPopup('Universitas Islam Negeri Sunan Kalijaga'),
+            sttekn      = L.marker([-7.773017535931398, 110.41624557901213]).bindPopup('Sekolah Tinggi Teknologi Nasional')
+			apmd        = L.marker([-7.791268385779311, 110.39402527901245]).bindPopup('Sekolah Tinggi Pembangunan Masyarakat Desa APMD'),
+            amdy        = L.marker([-7.82563094278019, 110.33599579435759]).bindPopup('Akademi Manajemen Administrasi Yogyakarta'),
+            api         = L.marker([-7.776004288688861, 110.41839195202904]).bindPopup('Politeknik API Yogyakarta'),
+            sttk        = L.marker([-7.82909764957897, 110.36619746437476]).bindPopup('Sekolah Tinggi Teknologi Kedirgantaraan Yogyakarta'),
+            instiper	= L.marker([-7.7611189339273325, 110.42465062319256]).bindPopup('Institut Pertanian Stiper (Instiper)'),
+            lpp         = L.marker([-7.7838232825751605, 110.38470480784848]).bindPopup('Politeknik LPP Yogyakarta'),
+            sttn         = L.marker([-7.778761144339689, 110.41471205681636]).bindPopup('Sekolah Tinggi Teknologi Nuklir (STTN) Yogyakarta'),
+            janabadra     = L.marker([-7.783727482752583, 110.35743883853762]).bindPopup('Universitas Janabadra'),
+            aau         = L.marker([-7.796911840681146, 110.43616638982778]).bindPopup('Akademi Angkatan Udara (AAU)')
+			lia        = L.marker([-7.757624087486545, 110.39189835202866]).bindPopup('Sekolah Tinggi Bahasa Asing LIA Yogyakarta'),
+            uny         = L.marker([-7.773580038645644, 110.38620817901219]).bindPopup('Universitas Negeri Yogyakarta (UNY)'),
+            alma     = L.marker([-7.818191910082626, 110.32438120784909]).bindPopup('Universitas Alma Ata'),
+            prok         = L.marker([-7.774141248190553, 110.41592665202901]).bindPopup('Universitas Proklamasi 45'),
+            ity			= L.marker([-7.7994973752798495, 110.40218413441096]).bindPopup('Institut Teknologi Yogyakarta'),
+            akakom      = L.marker([-7.792305961102612, 110.40831945124634]).bindPopup('Sekolah Tinggi Manajemen Informatika dan Komputer AKAKOM'),
+            mmtc         = L.marker([-7.751134583721674, 110.3613762520285]).bindPopup('Sekolah Tinggi Multi Media (MMTC) Yogyakarta'),
+            stpn      = L.marker([-7.7825931820081555, 110.34334265625601]).bindPopup('Sekolah Tinggi Pertanahan Nasional'),
+            akdibyo         = L.marker([-7.8494263826077155, 110.35769626366897]).bindPopup('Sekolah Tinggi Ilmu Kesehatan Akbidyo')
+			stie        = L.marker([-7.768738772513524, 110.41020526552043]).bindPopup('Sekolah Tinggi Ilmu Ekonomi YKPN'),
+            akma			= L.marker([-7.7671088753928705, 110.36463633668438]).bindPopup('Akademi Maritim Yogyakarta'),
+            sanata      = L.marker([-7.774915222139322, 110.39296637143356]).bindPopup('Universitas Sanata Dharma'),
+            stieww         = L.marker([-7.821907966935943, 110.37744200784924]).bindPopup('Sekolah Tinggi Ilmu Ekonomi Widya Wiwaha'),
+            amikom      = L.marker([-7.7598198475403795, 110.40911046737328]).bindPopup('Universitas AMIKOM Yogyakarta'),
+            akkun         = L.marker([-7.78412243285988, 110.3835672097015]).bindPopup('Akademi Akuntansi YKPN');
+            var kampus = L.layerGroup([atmajaya, uii,         
+            ukdw,     
+            ugm,         
+            ust,
+            unriyo,     
+            uad,         
+            akindo,      
+            umy,         
+            pky,         
+            ista,        
+            isi,         
+            upnvy,
+            atky,        
+            ucy,         
+            uin,         
+            sttekn,      
+            amdy,        
+            api,         
+            sttk,        
+            instiper,
+            lpp,         
+            sttn,         
+            janabadra,    
+            aau,         
+            uny,         
+            alma,     
+            prok,         
+            ity,
+            akakom,      
+            mmtc,         
+            stpn,      
+            akdibyo,         
+            akma,
+            sanata,      
+            stieww,         
+            amikom,      
+            akkun         
+]);
+        var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        });
+
+
+        var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
+
+        var map = L.map('map', {
+            center: [-7.79, 110.36],
+            zoom: 10,
+            layers: [osm, kampus]
+        });
+
+        var baseMaps = {
+            "OpenStreetMap": osm,
+            "OpenStreetMap.HOT": osmHOT
+        };
+
+        var overlayMaps = {
+            "Kampus Di Jogja": kampus
+        };
+        var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+        var baseMaps = {
+            "OpenStreetMap": osm,
+            "<span style='color: red'>OpenStreetMap.HOT</span>": osmHOT
+        };
+        var atmajaya    = L.marker([-7.780253873778961, 110.41408944235623]).bindPopup('Universitas Atma Jaya'),
+            uii         = L.marker([-7.687669006269317, 110.41320427901064]).bindPopup('Universitas Islam Indonesia'),
+            ukdw     = L.marker([-7.785968099213533, 110.37836961776321],).bindPopup('Universitas Kristen Duta Wacana'),
+            ugm         = L.marker([-7.771246498354627, 110.37754270970117]).bindPopup('Universitas Gadjah Mada (UGM)'),
+            ust			= L.marker([-7.807955083950973, 110.38168362070137]).bindPopup('Universitas Sarjanawiyata Tamansiswa'),
+            unriyo      = L.marker([-7.781504851421147, 110.40725668807157]).bindPopup('Universitas Respati Yogyakarta (UNRIYO)'),
+            uad         = L.marker([-7.798416411508186, 110.38304742023291]).bindPopup('Universitas Ahmad Dahlan (UAD)'),
+            akindo      = L.marker([-7.781254151428151, 110.4068138097014]).bindPopup('Akademi Komunikasi Indonesia (AKINDO) YPK'),
+            umy         = L.marker([-7.810600276928457, 110.32183943668505]).bindPopup('Universitas Muhammadiyah Yogyakarta')
+			stik        = L.marker([-7.767673789702375, 110.39575323928713]).bindPopup('Sekolah Tinggi Ilmu Kesehatan Panti Rapih'),
+            pky         = L.marker([-7.781002641459743, 110.34294103668455]).bindPopup('Poltekkes Kemenkes Yogyakarta'),
+            ista        = L.marker([-7.7837668909163344, 110.38530100942546]).bindPopup('Institut Sains dan Teknologi Akprind'),
+            isi         = L.marker([-7.851601150797581, 110.35653541181614]).bindPopup('Institut Seni Indonesia Yogyakarta)'),
+            upnvy		= L.marker([-7.762051773222823, 110.40932170970089]).bindPopup('UPN Veteran Yogyakarta'),
+            atky        = L.marker([-7.843053279681421, 110.3705693808664]).bindPopup('Akademi Teknologi Kulit Yogyakarta'),
+            ucy         = L.marker([-7.819661723635494, 110.39291300970204]).bindPopup('Universitas Cokroaminoto Yogyakarta'),
+            uin         = L.marker([-7.784645702755892, 110.39431597901235]).bindPopup('Universitas Islam Negeri Sunan Kalijaga'),
+            sttekn      = L.marker([-7.773017535931398, 110.41624557901213]).bindPopup('Sekolah Tinggi Teknologi Nasional')
+			apmd        = L.marker([-7.791268385779311, 110.39402527901245]).bindPopup('Sekolah Tinggi Pembangunan Masyarakat Desa APMD'),
+            amdy        = L.marker([-7.82563094278019, 110.33599579435759]).bindPopup('Akademi Manajemen Administrasi Yogyakarta'),
+            api         = L.marker([-7.776004288688861, 110.41839195202904]).bindPopup('Politeknik API Yogyakarta'),
+            sttk        = L.marker([-7.82909764957897, 110.36619746437476]).bindPopup('Sekolah Tinggi Teknologi Kedirgantaraan Yogyakarta'),
+            instiper	= L.marker([-7.7611189339273325, 110.42465062319256]).bindPopup('Institut Pertanian Stiper (Instiper)'),
+            lpp         = L.marker([-7.7838232825751605, 110.38470480784848]).bindPopup('Politeknik LPP Yogyakarta'),
+            sttn         = L.marker([-7.778761144339689, 110.41471205681636]).bindPopup('Sekolah Tinggi Teknologi Nuklir (STTN) Yogyakarta'),
+            janabadra     = L.marker([-7.783727482752583, 110.35743883853762]).bindPopup('Universitas Janabadra'),
+            aau         = L.marker([-7.796911840681146, 110.43616638982778]).bindPopup('Akademi Angkatan Udara (AAU)')
+			lia        = L.marker([-7.757624087486545, 110.39189835202866]).bindPopup('Sekolah Tinggi Bahasa Asing LIA Yogyakarta'),
+            uny         = L.marker([-7.773580038645644, 110.38620817901219]).bindPopup('Universitas Negeri Yogyakarta (UNY)'),
+            alma     = L.marker([-7.818191910082626, 110.32438120784909]).bindPopup('Universitas Alma Ata'),
+            prok         = L.marker([-7.774141248190553, 110.41592665202901]).bindPopup('Universitas Proklamasi 45'),
+            ity			= L.marker([-7.7994973752798495, 110.40218413441096]).bindPopup('Institut Teknologi Yogyakarta'),
+            akakom      = L.marker([-7.792305961102612, 110.40831945124634]).bindPopup('Sekolah Tinggi Manajemen Informatika dan Komputer AKAKOM'),
+            mmtc         = L.marker([-7.751134583721674, 110.3613762520285]).bindPopup('Sekolah Tinggi Multi Media (MMTC) Yogyakarta'),
+            stpn      = L.marker([-7.7825931820081555, 110.34334265625601]).bindPopup('Sekolah Tinggi Pertanahan Nasional'),
+            akdibyo         = L.marker([-7.8494263826077155, 110.35769626366897]).bindPopup('Sekolah Tinggi Ilmu Kesehatan Akbidyo')
+			stie        = L.marker([-7.768738772513524, 110.41020526552043]).bindPopup('Sekolah Tinggi Ilmu Ekonomi YKPN'),
+            akma			= L.marker([-7.7671088753928705, 110.36463633668438]).bindPopup('Akademi Maritim Yogyakarta'),
+            sanata      = L.marker([-7.774915222139322, 110.39296637143356]).bindPopup('Universitas Sanata Dharma'),
+            stieww         = L.marker([-7.821907966935943, 110.37744200784924]).bindPopup('Sekolah Tinggi Ilmu Ekonomi Widya Wiwaha'),
+            amikom      = L.marker([-7.7598198475403795, 110.40911046737328]).bindPopup('Universitas AMIKOM Yogyakarta'),
+            akkun         = L.marker([-7.78412243285988, 110.3835672097015]).bindPopup('Akademi Akuntansi YKPN');
+            
+        var kampus = L.layerGroup([atmajaya, uii,         
+            ukdw,     
+            ugm,         
+            ust,
+            unriyo,     
+            uad,         
+            akindo,      
+            umy,         
+            pky,         
+            ista,        
+            isi,         
+            upnvy,
+            atky,        
+            ucy,         
+            uin,         
+            sttekn,      
+            amdy,        
+            api,         
+            sttk,        
+            instiper,
+            lpp,         
+            sttn,         
+            janabadra,    
+            aau,         
+            uny,         
+            alma,     
+            prok,         
+            ity,
+            akakom,      
+            mmtc,         
+            stpn,      
+            akdibyo,         
+            akma,
+            sanata,      
+            stieww,         
+            amikom,      
+            akkun         
+]);
+        var openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)'
+        });
+
+        layerControl.addBaseLayer(openTopoMap, "OpenTopoMap");
+        layerControl.addOverlay(kampus, "Kampus Di Jogja");
+       </script> 
+    </body> 
+</html>
